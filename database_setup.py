@@ -26,6 +26,13 @@ class MenuItem(Base):
     restaurant_id = Column(Integer,ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant) 
 
+class Person(Base):
+    __tablename__ = 'person'
+
+
+    name = Column(String(80), nullable = False)
+    id = Column(Integer, primary_key = True)
+    
 
 engine = create_engine('postgres://ytrvdxrnzzphvf:dfjwYJ8qoE859jy9MVvYsRSd9v@ec2-54-83-52-71.compute-1.amazonaws.com:5432/des6sj4shuk7v4')
  

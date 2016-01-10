@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,jsonify
 app = Flask(__name__)
 
 from sqlalchemy import create_engine
@@ -58,7 +58,11 @@ def deleteMenuItem(restaurant_id, menu_id):
 	#USE THE RENDER_TEMPLATE FUNCTION BELOW TO SEE THE VARIABLES YOU SHOULD USE IN YOUR EDITMENUITEM TEMPLATE
 		return render_template('deleteitem.html', restaurant_id = restaurant_id, item = editedItem)
 
-  
+
+@app.route('/person/add/<int:personid>/<string:name>')
+def addPerson(personid = 1,name): 
+	return jsonify(status=name)
+
   
   
 #if __name__ == '__main__':
