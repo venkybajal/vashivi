@@ -1,101 +1,101 @@
-2016-01-10T20:44:03.696524+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/arbiter.py", line 464, in reap_workers
-2016-01-10T20:44:03.696603+00:00 app[web.1]:     raise HaltServer(reason, self.WORKER_BOOT_ERROR)
-2016-01-10T20:44:03.696655+00:00 app[web.1]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
-2016-01-10T20:44:04.217746+00:00 heroku[web.1]: State changed from crashed to starting
-2016-01-10T20:44:04.216716+00:00 heroku[web.1]: State changed from starting to crashed
-2016-01-10T20:44:04.208554+00:00 heroku[web.1]: Process exited with status 1
-2016-01-10T20:44:05.343850+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-2016-01-10T20:44:06.614618+00:00 heroku[web.1]: Starting process with command `gunicorn project:app --log-file=-`
-2016-01-10T20:44:06.822632+00:00 app[web.1]: [2016-01-10 20:44:06 +0000] [10] [INFO] Worker exiting (pid: 10)
-2016-01-10T20:44:06.842244+00:00 app[web.1]: [2016-01-10 20:44:06 +0000] [3] [INFO] Handling signal: term
-2016-01-10T20:44:06.823077+00:00 app[web.1]: [2016-01-10 20:44:06 +0000] [9] [INFO] Worker exiting (pid: 9)
-2016-01-10T20:44:06.844727+00:00 app[web.1]: [2016-01-10 20:44:06 +0000] [3] [INFO] Shutting down: Master
-2016-01-10T20:44:07.708088+00:00 heroku[web.1]: Process exited with status 0
-2016-01-10T20:44:09.448682+00:00 app[web.1]: [2016-01-10 20:44:09 +0000] [3] [INFO] Starting gunicorn 19.4.5
-2016-01-10T20:44:09.533810+00:00 app[web.1]: [2016-01-10 20:44:09 +0000] [10] [INFO] Booting worker with pid: 10
-2016-01-10T20:44:09.452551+00:00 app[web.1]: [2016-01-10 20:44:09 +0000] [3] [INFO] Listening at: http://0.0.0.0:55125 (3)
-2016-01-10T20:44:09.452714+00:00 app[web.1]: [2016-01-10 20:44:09 +0000] [3] [INFO] Using worker: sync
-2016-01-10T20:44:09.458358+00:00 app[web.1]: [2016-01-10 20:44:09 +0000] [9] [INFO] Booting worker with pid: 9
-2016-01-10T20:44:10.001525+00:00 app[web.1]: [2016-01-10 20:44:10 +0000] [9] [ERROR] Exception in worker process:
-2016-01-10T20:44:10.001530+00:00 app[web.1]: Traceback (most recent call last):
-2016-01-10T20:44:10.001531+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/arbiter.py", line 515, in spawn_worker
-2016-01-10T20:44:10.001533+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 122, in init_process
-2016-01-10T20:44:10.001532+00:00 app[web.1]:     worker.init_process()
-2016-01-10T20:44:10.001534+00:00 app[web.1]:     self.load_wsgi()
-2016-01-10T20:44:10.001535+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 130, in load_wsgi
-2016-01-10T20:44:10.001536+00:00 app[web.1]:     self.wsgi = self.app.wsgi()
-2016-01-10T20:44:10.001537+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2016-01-10T20:44:10.001538+00:00 app[web.1]:     self.callable = self.load()
-2016-01-10T20:44:10.001538+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
-2016-01-10T20:44:10.001540+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
-2016-01-10T20:44:10.001539+00:00 app[web.1]:     return self.load_wsgiapp()
-2016-01-10T20:44:10.001540+00:00 app[web.1]:     return util.import_app(self.app_uri)
-2016-01-10T20:44:10.001541+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
-2016-01-10T20:44:10.001542+00:00 app[web.1]:     __import__(module)
-2016-01-10T20:44:10.001542+00:00 app[web.1]:   File "/app/project.py", line 4, in <module>
-2016-01-10T20:44:10.001543+00:00 app[web.1]:     from sqlalchemy import create_engine
-2016-01-10T20:44:10.001544+00:00 app[web.1]: ImportError: No module named sqlalchemy
-2016-01-10T20:44:10.001544+00:00 app[web.1]: Traceback (most recent call last):
-2016-01-10T20:44:10.001545+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/arbiter.py", line 515, in spawn_worker
-2016-01-10T20:44:10.001545+00:00 app[web.1]:     worker.init_process()
-2016-01-10T20:44:10.001548+00:00 app[web.1]:     self.wsgi = self.app.wsgi()
-2016-01-10T20:44:10.001549+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2016-01-10T20:44:10.001552+00:00 app[web.1]:     self.callable = self.load()
-2016-01-10T20:44:10.001552+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
-2016-01-10T20:44:10.001553+00:00 app[web.1]:     return self.load_wsgiapp()
-2016-01-10T20:44:10.001554+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
-2016-01-10T20:44:10.001554+00:00 app[web.1]:     return util.import_app(self.app_uri)
-2016-01-10T20:44:10.001546+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 122, in init_process
-2016-01-10T20:44:10.001555+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
-2016-01-10T20:44:10.004131+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 122, in init_process
-2016-01-10T20:44:10.001547+00:00 app[web.1]:     self.load_wsgi()
-2016-01-10T20:44:10.001556+00:00 app[web.1]:     __import__(module)
-2016-01-10T20:44:10.001548+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 130, in load_wsgi
-2016-01-10T20:44:10.001556+00:00 app[web.1]:   File "/app/project.py", line 4, in <module>
-2016-01-10T20:44:10.004131+00:00 app[web.1]:     self.load_wsgi()
-2016-01-10T20:44:10.001557+00:00 app[web.1]:     from sqlalchemy import create_engine
-2016-01-10T20:44:10.004133+00:00 app[web.1]:     self.wsgi = self.app.wsgi()
-2016-01-10T20:44:10.001558+00:00 app[web.1]: ImportError: No module named sqlalchemy
-2016-01-10T20:44:10.004132+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 130, in load_wsgi
-2016-01-10T20:44:10.004139+00:00 app[web.1]:   File "/app/project.py", line 4, in <module>
-2016-01-10T20:44:10.001693+00:00 app[web.1]: [2016-01-10 20:44:10 +0000] [9] [INFO] Worker exiting (pid: 9)
-2016-01-10T20:44:10.004134+00:00 app[web.1]:     self.callable = self.load()
-2016-01-10T20:44:10.004123+00:00 app[web.1]: [2016-01-10 20:44:10 +0000] [10] [ERROR] Exception in worker process:
-2016-01-10T20:44:10.004135+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
-2016-01-10T20:44:10.004141+00:00 app[web.1]: Traceback (most recent call last):
-2016-01-10T20:44:10.004127+00:00 app[web.1]: Traceback (most recent call last):
-2016-01-10T20:44:10.004136+00:00 app[web.1]:     return self.load_wsgiapp()
-2016-01-10T20:44:10.004129+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/arbiter.py", line 515, in spawn_worker
-2016-01-10T20:44:10.004137+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
-2016-01-10T20:44:10.004143+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 122, in init_process
-2016-01-10T20:44:10.004130+00:00 app[web.1]:     worker.init_process()
-2016-01-10T20:44:10.004137+00:00 app[web.1]:     return util.import_app(self.app_uri)
-2016-01-10T20:44:10.004144+00:00 app[web.1]:     self.load_wsgi()
-2016-01-10T20:44:10.004138+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
-2016-01-10T20:44:10.004144+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/base.py", line 130, in load_wsgi
-2016-01-10T20:44:10.004134+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2016-01-10T20:44:10.004141+00:00 app[web.1]: ImportError: No module named sqlalchemy
-2016-01-10T20:44:10.004147+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
-2016-01-10T20:44:10.004139+00:00 app[web.1]:     __import__(module)
-2016-01-10T20:44:10.004145+00:00 app[web.1]:     self.wsgi = self.app.wsgi()
-2016-01-10T20:44:10.004140+00:00 app[web.1]:     from sqlalchemy import create_engine
-2016-01-10T20:44:10.004146+00:00 app[web.1]:     self.callable = self.load()
-2016-01-10T20:44:10.005593+00:00 app[web.1]: [2016-01-10 20:44:10 +0000] [10] [INFO] Worker exiting (pid: 10)
-2016-01-10T20:44:10.004146+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
-2016-01-10T20:44:10.004152+00:00 app[web.1]: ImportError: No module named sqlalchemy
-2016-01-10T20:44:10.004142+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/arbiter.py", line 515, in spawn_worker
-2016-01-10T20:44:10.004148+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
-2016-01-10T20:44:10.004147+00:00 app[web.1]:     return self.load_wsgiapp()
-2016-01-10T20:44:10.004143+00:00 app[web.1]:     worker.init_process()
-2016-01-10T20:44:10.004149+00:00 app[web.1]:     return util.import_app(self.app_uri)
-2016-01-10T20:44:10.004149+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
-2016-01-10T20:44:10.004150+00:00 app[web.1]:     __import__(module)
-2016-01-10T20:44:10.004150+00:00 app[web.1]:   File "/app/project.py", line 4, in <module>
-2016-01-10T20:44:10.004151+00:00 app[web.1]:     from sqlalchemy import create_engine
-2016-01-10T20:44:10.032556+00:00 app[web.1]: [2016-01-10 20:44:10 +0000] [3] [INFO] Shutting down: Master
-2016-01-10T20:44:10.032707+00:00 app[web.1]: [2016-01-10 20:44:10 +0000] [3] [INFO] Reason: Worker failed to boot.
-2016-01-10T20:44:11.000875+00:00 heroku[web.1]: State changed from starting to crashed
-2016-01-10T20:44:10.961883+00:00 heroku[web.1]: Process exited with status 3
-2016-01-10T20:44:22.485500+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=peaceful-anchorage-1223.herokuapp.com request_id=fa511e6f-74e6-47b0-b610-6faef903f851 fwd="182.65.254.243" dyno= connect= service= status=503 bytes=
-2016-01-10T20:44:24.834447+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=peaceful-anchorage-1223.herokuapp.com request_id=91700120-3890-4f76-a42b-adfc7e2a3a20 fwd="182.65.254.243" dyno= connect= service= status=503 bytes=
-2016-01-10T20:46:15.005546+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=peaceful-anchorage-1223.herokuapp.com request_id=8ae4c3ce-cceb-4393-be8f-fcf140a9716e fwd="182.65.254.243" dyno= connect= service= status=503 bytes=
+2016-01-10T20:56:44.139850+00:00 heroku[web.1]: State changed from starting to up
+2016-01-10T21:10:10.275207+00:00 heroku[router]: at=info method=GET path="/restaurant/1/2/delete/" host=peaceful-anchorage-1223.herokuapp.com request_id=bd76d9d6-9afe-4e2b-922b-920b54f28e23 fwd="182.65.254.243" dyno=web.1 connect=0ms service=96ms status=200 bytes=479
+2016-01-10T21:10:12.231709+00:00 heroku[router]: at=info method=POST path="/restaurant/1/2/delete/" host=peaceful-anchorage-1223.herokuapp.com request_id=5a542ec0-5ba3-47b6-9e7e-debf11882d37 fwd="182.65.254.243" dyno=web.1 connect=0ms service=18ms status=302 bytes=639
+2016-01-10T21:10:12.671025+00:00 heroku[router]: at=info method=GET path="/restaurants/1/" host=peaceful-anchorage-1223.herokuapp.com request_id=7acb51c8-7570-4407-b5e5-0b9afd81636e fwd="182.65.254.243" dyno=web.1 connect=0ms service=80ms status=200 bytes=1762
+2016-01-10T21:31:09.781390+00:00 heroku[router]: at=info method=GET path="/" host=peaceful-anchorage-1223.herokuapp.com request_id=e58332f6-d5fd-4e6a-be17-bd6fa6cbdf3b fwd="182.65.254.243,66.249.84.174" dyno=web.1 connect=1ms service=24ms status=200 bytes=1637
+2016-01-10T21:31:10.006930+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=peaceful-anchorage-1223.herokuapp.com request_id=f69236c5-d371-4e3f-9e7b-c1c6b61c6cd8 fwd="182.65.254.243,66.249.84.217" dyno=web.1 connect=0ms service=68ms status=404 bytes=386
+2016-01-10T21:31:11.112796+00:00 heroku[router]: at=info method=GET path="/" host=peaceful-anchorage-1223.herokuapp.com request_id=c7a49484-8feb-4863-9d7e-baa424e7ea3a fwd="182.65.254.243,64.233.172.150" dyno=web.1 connect=1ms service=25ms status=200 bytes=1637
+2016-01-10T21:31:11.197693+00:00 heroku[router]: at=info method=GET path="/static/style.css" host=peaceful-anchorage-1223.herokuapp.com request_id=1b9972e6-757f-4e0b-9c0c-a47a90f0a700 fwd="182.65.254.243,64.233.172.142" dyno=web.1 connect=1ms service=8ms status=200 bytes=1142
+2016-01-10T21:31:11.250111+00:00 heroku[router]: at=info method=GET path="/static/img3.jpg" host=peaceful-anchorage-1223.herokuapp.com request_id=06e45971-998e-4c03-8ae4-0d4a6c8d5d07 fwd="182.65.254.243,64.233.172.142" dyno=web.1 connect=2ms service=10ms status=404 bytes=386
+2016-01-10T21:41:42.175009+00:00 heroku[router]: at=info method=GET path="/restaurants/1/" host=peaceful-anchorage-1223.herokuapp.com request_id=12e93f5f-66fa-46d4-b90b-9a0d160029f1 fwd="182.65.254.243" dyno=web.1 connect=1ms service=23ms status=200 bytes=1637
+2016-01-10T21:41:42.796379+00:00 heroku[router]: at=info method=GET path="/static/style.css" host=peaceful-anchorage-1223.herokuapp.com request_id=f2d66e2a-283b-46fe-b682-864e27b0b042 fwd="182.65.254.243" dyno=web.1 connect=2ms service=9ms status=200 bytes=1142
+2016-01-10T21:41:43.333362+00:00 heroku[router]: at=info method=GET path="/static/img3.jpg" host=peaceful-anchorage-1223.herokuapp.com request_id=fb51d526-80c4-4f07-b00e-4e2cec465405 fwd="182.65.254.243" dyno=web.1 connect=1ms service=3ms status=404 bytes=386
+2016-01-10T21:41:56.403288+00:00 heroku[router]: at=info method=GET path="/restaurant/1/new/" host=peaceful-anchorage-1223.herokuapp.com request_id=b6919d1b-119d-4652-b5d2-4d8e1ce678d9 fwd="182.65.254.243" dyno=web.1 connect=1ms service=4ms status=200 bytes=377
+2016-01-10T21:42:06.321249+00:00 heroku[router]: at=info method=POST path="/restaurant/1/new/" host=peaceful-anchorage-1223.herokuapp.com request_id=3fa8f0e5-7b88-4058-8432-c0e7f9dbb808 fwd="182.65.254.243" dyno=web.1 connect=1ms service=24ms status=302 bytes=639
+2016-01-10T21:42:06.728123+00:00 heroku[router]: at=info method=GET path="/restaurants/1/" host=peaceful-anchorage-1223.herokuapp.com request_id=935c3389-8c78-414a-8819-55b08f9e626a fwd="182.65.254.243" dyno=web.1 connect=2ms service=23ms status=200 bytes=1914
+2016-01-10T21:42:29.883526+00:00 heroku[router]: at=info method=GET path="/restaurant/1/35/edit/" host=peaceful-anchorage-1223.herokuapp.com request_id=1ee1a1e1-53a9-4adf-8cca-7f4b01b61bc7 fwd="182.65.254.243" dyno=web.1 connect=1ms service=11ms status=200 bytes=483
+2016-01-10T21:42:33.381799+00:00 heroku[router]: at=info method=POST path="/restaurant/1/35/edit/" host=peaceful-anchorage-1223.herokuapp.com request_id=09b30f0e-5be4-4c07-8356-b1eaef1b7b1d fwd="182.65.254.243" dyno=web.1 connect=2ms service=11ms status=500 bytes=244
+2016-01-10T21:42:33.386902+00:00 app[web.1]: [2016-01-10 21:42:33 +0000] [9] [ERROR] Error handling request /restaurant/1/35/edit/
+2016-01-10T21:42:33.386906+00:00 app[web.1]: Traceback (most recent call last):
+2016-01-10T21:42:33.386908+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/sync.py", line 130, in handle
+2016-01-10T21:42:33.386909+00:00 app[web.1]:     self.handle_request(listener, req, client, addr)
+2016-01-10T21:42:33.386910+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/sync.py", line 171, in handle_request
+2016-01-10T21:42:33.386910+00:00 app[web.1]:     respiter = self.wsgi(environ, resp.start_response)
+2016-01-10T21:42:33.386911+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+2016-01-10T21:42:33.386912+00:00 app[web.1]:     return self.wsgi_app(environ, start_response)
+2016-01-10T21:42:33.386913+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+2016-01-10T21:42:33.386913+00:00 app[web.1]:     response = self.make_response(self.handle_exception(e))
+2016-01-10T21:42:33.386914+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+2016-01-10T21:42:33.386915+00:00 app[web.1]:     reraise(exc_type, exc_value, tb)
+2016-01-10T21:42:33.386916+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+2016-01-10T21:42:33.386916+00:00 app[web.1]:     response = self.full_dispatch_request()
+2016-01-10T21:42:33.386917+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1478, in full_dispatch_request
+2016-01-10T21:42:33.386918+00:00 app[web.1]:     response = self.make_response(rv)
+2016-01-10T21:42:33.386919+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1566, in make_response
+2016-01-10T21:42:33.386919+00:00 app[web.1]:     raise ValueError('View function did not return a response')
+2016-01-10T21:42:33.386920+00:00 app[web.1]: ValueError: View function did not return a response
+2016-01-10T21:42:38.274787+00:00 heroku[router]: at=info method=POST path="/restaurant/1/35/edit/" host=peaceful-anchorage-1223.herokuapp.com request_id=3d8f8869-22dc-4418-b359-88fc1aabd021 fwd="182.65.254.243" dyno=web.1 connect=1ms service=9ms status=500 bytes=244
+2016-01-10T21:42:38.279677+00:00 app[web.1]:     response = self.full_dispatch_request()
+2016-01-10T21:42:38.279664+00:00 app[web.1]: [2016-01-10 21:42:38 +0000] [9] [ERROR] Error handling request /restaurant/1/35/edit/
+2016-01-10T21:42:38.279668+00:00 app[web.1]: Traceback (most recent call last):
+2016-01-10T21:42:38.279675+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+2016-01-10T21:42:38.279669+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/sync.py", line 130, in handle
+2016-01-10T21:42:38.279670+00:00 app[web.1]:     self.handle_request(listener, req, client, addr)
+2016-01-10T21:42:38.279673+00:00 app[web.1]:     return self.wsgi_app(environ, start_response)
+2016-01-10T21:42:38.279680+00:00 app[web.1]:     raise ValueError('View function did not return a response')
+2016-01-10T21:42:38.279671+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/sync.py", line 171, in handle_request
+2016-01-10T21:42:38.279672+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+2016-01-10T21:42:38.279676+00:00 app[web.1]:     reraise(exc_type, exc_value, tb)
+2016-01-10T21:42:38.279671+00:00 app[web.1]:     respiter = self.wsgi(environ, resp.start_response)
+2016-01-10T21:42:38.279674+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+2016-01-10T21:42:38.279679+00:00 app[web.1]:     response = self.make_response(rv)
+2016-01-10T21:42:38.279674+00:00 app[web.1]:     response = self.make_response(self.handle_exception(e))
+2016-01-10T21:42:38.279677+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+2016-01-10T21:42:38.279681+00:00 app[web.1]: ValueError: View function did not return a response
+2016-01-10T21:42:38.279678+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1478, in full_dispatch_request
+2016-01-10T21:42:38.279680+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/flask/app.py", line 1566, in make_response
+2016-01-10T21:43:14.757973+00:00 heroku[router]: at=info method=GET path="/restaurants/2/" host=peaceful-anchorage-1223.herokuapp.com request_id=43d948d0-6694-41cd-99cb-178b7d3f19c7 fwd="182.65.254.243" dyno=web.1 connect=1ms service=11ms status=200 bytes=2003
+2016-01-10T22:17:43.548874+00:00 heroku[web.1]: Idling
+2016-01-10T22:17:43.549471+00:00 heroku[web.1]: State changed from up to down
+2016-01-10T22:17:49.163743+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2016-01-10T22:17:50.773933+00:00 app[web.1]: [2016-01-10 22:17:50 +0000] [3] [INFO] Handling signal: term
+2016-01-10T22:17:50.784456+00:00 app[web.1]: [2016-01-10 22:17:50 +0000] [10] [INFO] Worker exiting (pid: 10)
+2016-01-10T22:17:50.774736+00:00 app[web.1]: [2016-01-10 22:17:50 +0000] [9] [INFO] Worker exiting (pid: 9)
+2016-01-10T22:17:51.087337+00:00 app[web.1]: [2016-01-10 22:17:51 +0000] [3] [INFO] Shutting down: Master
+2016-01-10T22:17:52.302256+00:00 heroku[web.1]: Process exited with status 0
+2016-01-10T22:21:48.306897+00:00 heroku[api]: Deploy d31ce03 by venkybajal@gmail.com
+2016-01-10T22:21:48.306897+00:00 heroku[api]: Release v7 created by venkybajal@gmail.com
+2016-01-10T22:21:48.459954+00:00 heroku[slug-compiler]: Slug compilation started
+2016-01-10T22:21:48.459959+00:00 heroku[slug-compiler]: Slug compilation finished
+2016-01-10T22:22:09.475025+00:00 heroku[web.1]: Unidling
+2016-01-10T22:22:09.475446+00:00 heroku[web.1]: State changed from down to starting
+2016-01-10T22:22:11.633749+00:00 heroku[web.1]: Starting process with command `gunicorn project:app --log-file=-`
+2016-01-10T22:22:13.303518+00:00 heroku[web.1]: State changed from starting to up
+2016-01-10T22:22:13.279024+00:00 app[web.1]: [2016-01-10 22:22:13 +0000] [3] [INFO] Listening at: http://0.0.0.0:38540 (3)
+2016-01-10T22:22:13.278618+00:00 app[web.1]: [2016-01-10 22:22:13 +0000] [3] [INFO] Starting gunicorn 19.4.5
+2016-01-10T22:22:13.279098+00:00 app[web.1]: [2016-01-10 22:22:13 +0000] [3] [INFO] Using worker: sync
+2016-01-10T22:22:13.369316+00:00 app[web.1]: [2016-01-10 22:22:13 +0000] [10] [INFO] Booting worker with pid: 10
+2016-01-10T22:22:13.282496+00:00 app[web.1]: [2016-01-10 22:22:13 +0000] [9] [INFO] Booting worker with pid: 9
+2016-01-10T22:22:14.552583+00:00 heroku[router]: at=info method=GET path="/add/1/venk" host=peaceful-anchorage-1223.herokuapp.com request_id=ea141236-2cd3-4607-a22b-4b6dc639e124 fwd="182.65.254.243" dyno=web.1 connect=1ms service=32ms status=404 bytes=386
+2016-01-10T22:22:28.301919+00:00 heroku[router]: at=info method=GET path="/person/add/1/venk" host=peaceful-anchorage-1223.herokuapp.com request_id=1fda88fd-0704-4ea8-9f87-6ba3daeadc36 fwd="182.65.254.243" dyno=web.1 connect=1ms service=13ms status=404 bytes=386
+2016-01-10T22:22:31.159169+00:00 heroku[router]: at=info method=GET path="/person/add/1/venk" host=peaceful-anchorage-1223.herokuapp.com request_id=b211f6c9-d0d1-44b3-899e-e6d53e380d91 fwd="182.65.254.243" dyno=web.1 connect=1ms service=2ms status=404 bytes=386
+2016-01-10T22:24:34.939262+00:00 heroku[api]: Deploy aee74bc by venkybajal@gmail.com
+2016-01-10T22:24:34.939262+00:00 heroku[api]: Release v8 created by venkybajal@gmail.com
+2016-01-10T22:24:35.116724+00:00 heroku[slug-compiler]: Slug compilation started
+2016-01-10T22:24:35.116729+00:00 heroku[slug-compiler]: Slug compilation finished
+2016-01-10T22:24:35.051470+00:00 heroku[web.1]: State changed from up to starting
+2016-01-10T22:24:37.175398+00:00 heroku[web.1]: Starting process with command `gunicorn project:app --log-file=-`
+2016-01-10T22:24:38.403835+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2016-01-10T22:24:39.141140+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [3] [INFO] Starting gunicorn 19.4.5
+2016-01-10T22:24:39.173526+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [10] [INFO] Booting worker with pid: 10
+2016-01-10T22:24:39.141957+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [3] [INFO] Listening at: http://0.0.0.0:43421 (3)
+2016-01-10T22:24:39.142114+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [3] [INFO] Using worker: sync
+2016-01-10T22:24:39.146661+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [9] [INFO] Booting worker with pid: 9
+2016-01-10T22:24:39.502326+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [3] [INFO] Shutting down: Master
+2016-01-10T22:24:39.491778+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [9] [INFO] Worker exiting (pid: 9)
+2016-01-10T22:24:39.491802+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [10] [INFO] Worker exiting (pid: 10)
+2016-01-10T22:24:39.496922+00:00 app[web.1]: [2016-01-10 22:24:39 +0000] [3] [INFO] Handling signal: term
+2016-01-10T22:24:40.071258+00:00 heroku[web.1]: Process exited with status 0
+2016-01-10T22:24:40.881479+00:00 heroku[web.1]: State changed from starting to up
+2016-01-10T22:24:47.618718+00:00 heroku[router]: at=info method=GET path="/person/add/1/venk" host=peaceful-anchorage-1223.herokuapp.com request_id=1c21d6ea-3a64-4d03-b06a-68e25b82a346 fwd="182.65.254.243" dyno=web.1 connect=1ms service=3ms status=200 bytes=174
+2016-01-10T22:25:07.191053+00:00 heroku[router]: at=info method=GET path="/person/add/1/venk" host=peaceful-anchorage-1223.herokuapp.com request_id=ab8154cb-9dbe-483d-8d09-dffba44ec686 fwd="182.65.254.243" dyno=web.1 connect=1ms service=3ms status=200 bytes=174

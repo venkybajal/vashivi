@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+from database_setup import Base, Restaurant, MenuItem,Person
 
 engine = create_engine('postgres://ytrvdxrnzzphvf:dfjwYJ8qoE859jy9MVvYsRSd9v@ec2-54-83-52-71.compute-1.amazonaws.com:5432/des6sj4shuk7v4')
 Base.metadata.bind = engine
@@ -12,6 +12,9 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 @app.route('/')
+def home():
+	return render_template('home.html')
+
 @app.route('/restaurants/<int:restaurant_id>/')
 def restaurantMenu(restaurant_id = 1):
   restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
@@ -61,11 +64,15 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 @app.route('/person/add/<int:personid>/<string:name>')
 def addPerson(personid,name): 
-	return jsonify(status=name)
+	newItem = Person(id = personid,name=name)
+  	session.add(newItem)
+  	session.commit()
+	return jsonify(status="Added")
+
 
   
   
-#if __name__ == '__main__':
+
 app.debug = True
 app.secret_key = "kanilamba"
 #app.run(host = '0.0.0.0', port = 5000)
