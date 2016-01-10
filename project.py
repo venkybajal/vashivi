@@ -60,7 +60,7 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 
 @app.route('/person/add/<int:personid>/<string:name>')
-def addPerson(personid = 1,name): 
+def addPerson(personid,name): 
 	return jsonify(status=name)
 
   
