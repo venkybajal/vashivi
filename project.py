@@ -42,7 +42,7 @@ def addPersonPost():
 	else:
 		interests = ""
 
-	person = session.query(Person).filter_by(phone = phone).one()
+	person = session.query(Person).filter_by(phone = phone)
 	if person:
 		return jsonify(status="failed",reason="Already Exists")
 
