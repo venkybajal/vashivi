@@ -42,7 +42,7 @@ def addPersonPost():
 	else:
 		interests = ""
 
-	person = session.query(Person).filter_by(id = phone).one()
+	person = session.query(Person).filter_by(phone = phone).one()
 	if person:
 		return jsonify(status="failed",reason="Already Exists")
 
@@ -58,7 +58,7 @@ def viewPersonPost():
 	else:
 		return jsonify(status="failed",reason="Phone Number Incorrect")
 
-	person = session.query(Person).filter_by(id = phone).one()
+	person = session.query(Person).filter_by(phone = phone).one()
 	if person:
 		return jsonify(status = "success",data = person)
 	else:
