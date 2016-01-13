@@ -64,7 +64,7 @@ def viewPersonPost():
 	else:
 		return jsonify(status = "success",reason="Not Found")
 
-if __name__ == '__main__':
-	app.debug = True
-	app.secret_key = "kanilamba"
-	app.run(host = '0.0.0.0', port = 5000)
+
+app.debug = True
+app.secret_key = "kanilamba"
+#app.run(host = '0.0.0.0', port = 5000)
