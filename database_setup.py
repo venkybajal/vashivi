@@ -15,15 +15,32 @@ class Person(Base):
 
     name = Column(String(80), nullable = False)
     phone = Column(String(10), primary_key = True)
-    interests = Column(String(500), nullable = False)
+    age = Column(Integer, nullable = False)
 
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
             'name': self.name,
-            'id': self.phone,
-            'interests': self.interests
+            'phone': self.phone,
+            'age': self.age
+        }
+
+class Interests(Base):
+    __tablename__ = 'interests'
+
+
+    name = Column(String(80), nullable = False,primary_key = True)
+    phone = Column(String(10), ForeignKey("person.phone",ondelete="CASCADE"),primary_key = True)
+    
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'name': self.name,
+            'phone': self.phone,
+            
         }
 
 engine = create_engine(DATABASE_URL)
