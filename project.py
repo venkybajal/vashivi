@@ -53,7 +53,7 @@ def addPersonPost():
 		else:
 			return jsonify(status="failed",reason="Already Exists!")
 			
-	return jsonify(status="failed",reason="JSON Body Required")
+	return jsonify(status="failed",reason="JSON Body or Header Incorrect!")
 
 	'''
 		if "phone" in request.headers and request.headers["phone"] != "" and  len(request.headers["phone"])==10:
@@ -99,7 +99,7 @@ def viewPersonPost():
 			else:
 				return jsonify(status = "success",reason="Not Found")
 		return jsonify(status="failed",reason="Phone Number Incorrect")
-	return jsonify(status="failed",reason="JSON Body Required")
+	return jsonify(status="failed",reason="JSON Body or Header Incorrect!")
 
 
 
