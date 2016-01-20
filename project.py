@@ -26,6 +26,7 @@ def addPersonPost():
 		try:
 			reqJson = json.loads(request.data)
 		except:
+			print "Response:"+request.data
 			print "JSON body Error"
 			return jsonify(status="failed",reason="JSON Body Error")
 		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
