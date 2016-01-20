@@ -22,7 +22,7 @@ def home():
 @app.route('/person/add/',methods=['POST'])
 def addPersonPost():
     
-	if request.headers['Content-Type'] == 'application/json':
+	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
 		try:
 			reqJson = json.loads(request.data)
 		except:
@@ -85,7 +85,7 @@ def addPersonPost():
 	'''
 @app.route('/person/view/',methods=['POST'])
 def viewPersonPost():
-	if request.headers['Content-Type'] == 'application/json':
+	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
 		try:
 			reqJson = json.loads(request.data)
 		except:
