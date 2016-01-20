@@ -4,6 +4,7 @@ app = Flask(__name__)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, DATABASE_URL,Person,Interests
+import json
 
 engine = create_engine(DATABASE_URL)
 Base.metadata.bind = engine
@@ -20,46 +21,87 @@ def home():
 
 @app.route('/person/add/',methods=['POST'])
 def addPersonPost():
-	if "phone" in request.headers and request.headers["phone"] != "" and  len(request.headers["phone"])==10:
-		phone = request.headers["phone"]
-	else:
-		return jsonify(status="failed",reason="Phone Number Incorrect")
+    
+	if request.headers['Content-Type'] == 'application/json':
+		try:
+			reqJson = json.loads(request.data)
+		except:
+			return jsonify(status="failed",reason="JSON Body Error")
+		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
+			phone =  reqJson["phone"]
+		else:	
+			return jsonify(status="failed",reason="Phone Number is Incorrect")
 
-	if "name" in request.headers and request.headers["name"] != "":
-		name  = request.headers["name"]
-	else:
-		return jsonify(status="failed",reason="Name Incorrect")
+		if "name" in reqJson and reqJson["name"] != "":
+			name =  reqJson["name"]
+		else:	
+			return jsonify(status="failed",reason="Name is Incorrect")
 
-	if "age" in request.headers:
-		age  = request.headers["age"]
-	else:
-		return jsonify(status="failed",reason="Age Incorrect")
- 
-	if "interests" in request.headers and request.headers["interests"] != "":
-		interests  = request.headers["interests"]
-	else:
-		return jsonify(status="failed",reason="Interests Incorrect")
+		if "age" in reqJson and reqJson["age"] != "":
+			age =  reqJson["age"]
+		else:	
+			return jsonify(status="failed",reason="Age is Incorrect")
 
-	if addInterest(interests,age,phone,name):
-		session.commit();
+		if "interests" in reqJson and reqJson["interests"] != "":
+			interests =  reqJson["interests"]
+		else:	
+			return jsonify(status="failed",reason="Interests are Incorrect")
 
-		return jsonify(status="success",reason="Added")
-	else:
-		return jsonify(status="failed",reason="Already Exists!")
+		if addInterest(interests,age,phone,name):
+			session.commit();
+			return jsonify(status="success",reason="Added")
+		else:
+			return jsonify(status="failed",reason="Already Exists!")
+			
+	return jsonify(status="failed",reason="JSON Body Required")
 
+	'''
+		if "phone" in request.headers and request.headers["phone"] != "" and  len(request.headers["phone"])==10:
+			phone = request.headers["phone"]
+		else:
+			return jsonify(status="failed",reason="Phone Number Incorrect")
+
+		if "name" in request.headers and request.headers["name"] != "":
+			name  = request.headers["name"]
+		else:
+			return jsonify(status="failed",reason="Name Incorrect")
+
+		if "age" in request.headers:
+			age  = request.headers["age"]
+		else:
+			return jsonify(status="failed",reason="Age Incorrect")
+	 
+		if "interests" in request.headers and request.headers["interests"] != "":
+			interests  = request.headers["interests"]
+		else:
+			return jsonify(status="failed",reason="Interests Incorrect")
+
+		if addInterest(interests,age,phone,name):
+			session.commit();
+
+			return jsonify(status="success",reason="Added")
+		else:
+			return jsonify(status="failed",reason="Already Exists!")
+	'''
 @app.route('/person/view/',methods=['POST'])
 def viewPersonPost():
-	if "phone" in request.headers and request.headers["phone"] != "" and  len(request.headers["phone"])==10:
-		phone = request.headers["phone"]
-	else:
+	if request.headers['Content-Type'] == 'application/json':
+		try:
+			reqJson = json.loads(request.data)
+		except:
+			return jsonify(status="failed",reason="JSON Body Error")
+		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
+			phone =  reqJson["phone"]
+			person = session.query(Person).filter_by(phone = phone).first()
+			interest = session.query(Interests).filter_by(phone = phone).all()
+			if person:
+				return jsonify(status = "success",data = person.serialize,interests=[r.serialize for r in interest])
+			else:
+				return jsonify(status = "success",reason="Not Found")
 		return jsonify(status="failed",reason="Phone Number Incorrect")
+	return jsonify(status="failed",reason="JSON Body Required")
 
-	person = session.query(Person).filter_by(phone = phone).first()
-	interest = session.query(Interests).filter_by(phone = phone).all()
-	if person:
-		return jsonify(status = "success",data = person.serialize,interests=[r.serialize for r in interest])
-	else:
-		return jsonify(status = "success",reason="Not Found")
+
 
 def addInterest(interest,age,phone,name):
 	interests_all = interest.split(",")
@@ -97,6 +139,7 @@ def addPerson(age,phone,name):
                    # the one that was initiated in method_a().
         raise
 
-app.debug = True
-app.secret_key = "kanilamba"
-#app.run(host = '0.0.0.0', port = 5000)
+if __name__ == '__main__':
+	app.debug = True
+	app.secret_key = "kanilamba"
+	app.run(host = '0.0.0.0', port = 5000)
