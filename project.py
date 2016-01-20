@@ -26,33 +26,45 @@ def addPersonPost():
 		try:
 			reqJson = json.loads(request.data)
 		except:
+			print "JSON body Error"
 			return jsonify(status="failed",reason="JSON Body Error")
 		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
 			phone =  reqJson["phone"]
+			print "Phone:"+phone
 		else:	
+			print "Phone Number is Incorrect"
 			return jsonify(status="failed",reason="Phone Number is Incorrect")
 
 		if "name" in reqJson and reqJson["name"] != "":
 			name =  reqJson["name"]
+			print "Name:"+name
 		else:	
+			print "Name is Incorrect"
 			return jsonify(status="failed",reason="Name is Incorrect")
 
 		if "age" in reqJson and reqJson["age"] != "":
 			age =  reqJson["age"]
+			print "Age:"+age
 		else:	
+			print "AGE is Incorrect"
 			return jsonify(status="failed",reason="Age is Incorrect")
 
 		if "interests" in reqJson and reqJson["interests"] != "":
 			interests =  reqJson["interests"]
+			print "Interests:"+interests
 		else:	
+			print "Interests is Incorrect"
 			return jsonify(status="failed",reason="Interests are Incorrect")
 
 		if addInterest(interests,age,phone,name):
 			session.commit();
+			print "Successfully Added"
 			return jsonify(status="success",reason="Added")
 		else:
+			print "Already Exists"
 			return jsonify(status="failed",reason="Already Exists!")
-			
+	
+	print "JSON Body or Header Incorrect!"		
 	return jsonify(status="failed",reason="JSON Body or Header Incorrect!")
 
 	'''
