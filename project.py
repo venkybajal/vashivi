@@ -92,6 +92,7 @@ def viewPersonPost():
 			return jsonify(status="failed",reason="JSON Body Error")
 		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
 			phone =  reqJson["phone"]
+			print "Phone Number: "+phone 
 			person = session.query(Person).filter_by(phone = phone).first()
 			interest = session.query(Interests).filter_by(phone = phone).all()
 			if person:
