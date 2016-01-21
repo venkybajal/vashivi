@@ -6,13 +6,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, DATABASE_URL,Person,Interests,Friends
 import json
-
+import smtplib
 engine = create_engine(DATABASE_URL)
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+MESSAGE = 'Subject: %s\n\n%s' % ("Danger Alert", "I am not danger")
 @app.route('/')
 def home():
 	person = session.query(Person).all()
@@ -111,7 +112,49 @@ def viewFriendsPost():
 			return jsonify(status="success", reason="Contact Not Available")
 	return jsonify(status="success",reason="Header Error")
 
+@app.route('/person/safemail/',methods=['POST'])
+def send_mail_post():
+	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
+		try:
+			reqJson = json.loads(request.data)
+		except:
+			return jsonify(status="failed", reason="JSON Body Error")
 
+		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
+			phone =  reqJson["phone"]
+		else:
+			return jsonify(status="failed",reason="Phone Number is Incorrect")
+
+		friend = session.query(Friends).filter_by(user_phone = phone).all()
+		email_list = get_all_mail(friend)
+		print email_list
+		for i in email_list:
+			send_email(i)
+
+		if friend:
+			return jsonify(status="success", data=[r.serialize for r in friend])
+		else:
+			return jsonify(status="success", reason="Contact Not Available")
+	return jsonify(status="success",reason="Header Error")
+
+
+def get_all_mail(friend):
+	lists = []
+	for i in friend:
+		lists.append(i.email)
+	return lists
+
+def send_email(to_addr):
+	# Credentials (if needed)
+	username = 'venkybajal@gmail.com'
+	password = open("passw.pass").read()
+
+	# The actual mail send
+	server = smtplib.SMTP('smtp.gmail.com:587')
+	server.starttls()
+	server.login(username, password)
+	server.sendmail(username, to_addr, MESSAGE)
+	server.quit()
 
 def addInterest(interest,age,phone,name):
 	interests_all = interest.split(",")
