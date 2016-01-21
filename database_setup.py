@@ -7,8 +7,8 @@ from sqlalchemy import create_engine
  
 Base = declarative_base()
  
-DATABASE_URL = 'postgres://ytrvdxrnzzphvf:dfjwYJ8qoE859jy9MVvYsRSd9v@ec2-54-83-52-71.compute-1.amazonaws.com:5432/des6sj4shuk7v4'
-#DATABASE_URL = 'sqlite:///restaurantmenu.db'
+#DATABASE_URL = 'postgres://ytrvdxrnzzphvf:dfjwYJ8qoE859jy9MVvYsRSd9v@ec2-54-83-52-71.compute-1.amazonaws.com:5432/des6sj4shuk7v4'
+DATABASE_URL = 'sqlite:///restaurantmenu.db'
 class Person(Base):
     __tablename__ = 'person'
 
@@ -43,5 +43,24 @@ class Interests(Base):
             
         }
 
+class Friends(Base):
+    __tablename__ = 'friends'
+
+
+    name = Column(String(80), nullable = False)
+    phone = Column(String(10), nullable = False,primary_key = True)
+    email = Column(String(100), nullable = False)
+    user_phone  = Column(String(10), ForeignKey("person.phone",ondelete="CASCADE"))
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'name': self.name,
+            'phone': self.phone,
+            'email': self.email,
+            'user_phone': self.user_phone
+            
+        }
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
