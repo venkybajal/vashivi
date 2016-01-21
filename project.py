@@ -1,3 +1,4 @@
+#author Venkat
 from flask import Flask, render_template, request, redirect, url_for, flash,jsonify
 app = Flask(__name__)
 
@@ -89,7 +90,7 @@ def viewPersonPost():
 	return jsonify(status="failed", reason="JSON Body or Header Incorrect!")
 
 @app.route('/person/friend/view/',methods=['POST'])
-def viewFriendPost():
+def viewFriendsPost():
 
 	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
 		try:
