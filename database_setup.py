@@ -44,7 +44,7 @@ class Interests(Base):
         }
 
 class Friends(Base):
-    __tablename__ = 'friends'
+    __tablename__ = 'friend'
 
 
     name = Column(String(80), nullable = False)
