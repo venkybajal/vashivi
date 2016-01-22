@@ -87,8 +87,8 @@ def get_dn_stranger():
 		elif request_json["feature"] == "2":
 			print "Feature: "+request_json["feature"]
 			dn = request_json["dn"]
-			print "DN reqested: "+dn
-			i = get_dn(dn)
+			print "DN reqested: "+str(dn)
+			i = get_dn(str(dn))
 			if i:
 				print "DN Selected: "+i.get_number()
 				i.increment_counter_2()

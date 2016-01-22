@@ -188,7 +188,7 @@ def get_all_mail(friend):
 		lists.append(i.email)
 	return lists
 
-def get_message_content(name,recv):
+def get_message_content(name):
 	MESSAGE = 'Subject: %s\n\n%s' % ("Safe Alert",
 	"""
 	Hi,
