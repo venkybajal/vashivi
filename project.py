@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import Base, DATABASE_URL,Person,Interests,Friends
 import json
 import smtplib
+
 engine = create_engine(DATABASE_URL)
 Base.metadata.bind = engine
 
@@ -91,6 +92,50 @@ def viewPersonPost():
 	return jsonify(status="failed", reason="JSON Body or Header Incorrect!")
 
 @app.route('/person/friend/view/',methods=['POST'])
+def addFriendsPost():
+	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
+		try:
+			reqJson = json.loads(request.data)
+		except:
+			return jsonify(status="failed", reason="JSON Body Error")
+
+		if "phone" in reqJson and reqJson["phone"] != "" and len(reqJson["phone"]) == 10:
+			phone =  reqJson["phone"]
+		else:
+			return jsonify(status="failed",reason="Phone Number is Incorrect")
+
+		if "email" in reqJson and reqJson["email"] != "":
+			email =  reqJson["email"]
+		else:
+			return jsonify(status="failed",reason="Email is Incorrect")
+
+		if "name" in reqJson and reqJson["name"] != "":
+			name =  reqJson["name"]
+		else:
+			return jsonify(status="failed",reason="Name is Incorrect")
+
+		if "user_phone" in reqJson and reqJson["user_phone"] != "" and len(reqJson["phone"]) == 10:
+			user_phone =  reqJson["user_phone"]
+		else:
+			return jsonify(status="failed",reason="User Phone No is Incorrect")
+
+		user = session.query(Person).filter_by(phone = user_phone).first()
+		if user:
+			newFriend = Friends(phone = phone, name=name, email = email, user_phone = user_phone)
+			session.add(newFriend)
+			session.commit()
+			return jsonify(status="failed",reason="Friend Successfull Added")
+		else:
+			return jsonify(status="failed",reason="User Profile Doesn't Exist")
+
+
+
+
+
+
+
+
+@app.route('/person/friend/view/',methods=['POST'])
 def viewFriendsPost():
 
 	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
@@ -143,6 +188,8 @@ def get_all_mail(friend):
 	for i in friend:
 		lists.append(i.email)
 	return lists
+
+
 
 def send_email(to_addr):
 	# Credentials (if needed)
