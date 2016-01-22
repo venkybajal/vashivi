@@ -95,7 +95,7 @@ def viewPersonPost():
 		return jsonify(status="failed", reason="Phone Number Incorrect")
 	return jsonify(status="failed", reason="JSON Body or Header Incorrect!")
 
-@app.route('/person/friend/view/',methods=['POST'])
+@app.route('/person/friend/add/',methods=['POST'])
 def addFriendsPost():
 	if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
 		try:
@@ -169,14 +169,14 @@ def send_mail_post():
 			return jsonify(status="failed",reason="Phone Number is Incorrect")
 
 		friend = session.query(Friends).filter_by(user_phone = phone).all()
-		person = session.query(Person).filter_by(phone = friend.user_phone).first()
+		person = session.query(Person).filter_by(phone = phone).first()
 		email_list = get_all_mail(friend)
 		print email_list
 		for i in email_list:
 			send_email(i,person.name)
 
 		if friend:
-			return jsonify(status="success", data=[r.serialize for r in friend])
+			return jsonify(status="success")
 		else:
 			return jsonify(status="success", reason="Contact Not Available")
 	return jsonify(status="success",reason="Header Error")
@@ -188,8 +188,19 @@ def get_all_mail(friend):
 		lists.append(i.email)
 	return lists
 
-def get_message_content(name):
-	MESSAGE = 'Subject: %s\n\n%s' % ("Safe Alert", "Hi, "+name+"is  Safe. Thank You for your concern")
+def get_message_content(name,recv):
+	MESSAGE = 'Subject: %s\n\n%s' % ("Safe Alert",
+	"""
+	Hi,
+
+	"""+name+""" is Safe.
+
+	Thank You for your concern
+	Sent By: Vashivi Social
+
+	""")
+
+
  	return MESSAGE
 
 def send_email(to_addr,name):
