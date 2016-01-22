@@ -14,7 +14,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-MESSAGE = 'Subject: %s\n\n%s' % ("Danger Alert", "I am not danger")
+
 @app.route('/')
 def home():
 	person = session.query(Person).all()
@@ -169,10 +169,11 @@ def send_mail_post():
 			return jsonify(status="failed",reason="Phone Number is Incorrect")
 
 		friend = session.query(Friends).filter_by(user_phone = phone).all()
+		person = session.query(Person).filter_by(phone = friend.user_phone).first()
 		email_list = get_all_mail(friend)
 		print email_list
 		for i in email_list:
-			send_email(i)
+			send_email(i,person.name)
 
 		if friend:
 			return jsonify(status="success", data=[r.serialize for r in friend])
@@ -187,9 +188,11 @@ def get_all_mail(friend):
 		lists.append(i.email)
 	return lists
 
+def get_message_content(name):
+	MESSAGE = 'Subject: %s\n\n%s' % ("Safe Alert", "Hi, "+name+"is  Safe. Thank You for your concern")
+ 	return MESSAGE
 
-
-def send_email(to_addr):
+def send_email(to_addr,name):
 	# Credentials (if needed)
 	username = 'venkybajal@gmail.com'
 	password = open("passw.pass").read()
@@ -198,7 +201,7 @@ def send_email(to_addr):
 	server = smtplib.SMTP('smtp.gmail.com:587')
 	server.starttls()
 	server.login(username, password)
-	server.sendmail(username, to_addr, MESSAGE)
+	server.sendmail(username, to_addr, get_message_content(name))
 	server.quit()
 
 def addInterest(interest,age,phone,name):
