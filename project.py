@@ -18,7 +18,11 @@ MESSAGE = 'Subject: %s\n\n%s' % ("Danger Alert", "I am not danger")
 @app.route('/')
 def home():
 	person = session.query(Person).all()
-	return render_template('home.html')
+	interests = session.query(Interests).all()
+	friends = session.query(Friends).all()
+	return render_template('home.html',person = person, interests = interests,friends = friends )
+
+
 
 
 
@@ -127,12 +131,6 @@ def addFriendsPost():
 			return jsonify(status="failed",reason="Friend Successfull Added")
 		else:
 			return jsonify(status="failed",reason="User Profile Doesn't Exist")
-
-
-
-
-
-
 
 
 @app.route('/person/friend/view/',methods=['POST'])
